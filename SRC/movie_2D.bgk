@@ -1,0 +1,13 @@
+#usage: in gnuplot i=0, enter, load 'movie.bgk'
+set pm3d
+unset surface
+set pm3d map
+set cbr[0:2.1]   # density palette
+set size ratio -1
+splot 'BGK_2.ruv2d' index i u 1:2:3 title 'Density Contours' 
+print "i=", i
+i=i+1
+pause -1 "click to continue"
+#pause 0.5
+if(i<1000) reread
+

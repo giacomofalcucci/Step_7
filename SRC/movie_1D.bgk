@@ -1,0 +1,11 @@
+#usage: in gnuplot i=0, enter, load 'movie.bgk'
+set yr[0:2.1] 
+set grid 
+p   'BGK_2.prof_i.dat' index i u 1:2 w l title 'Density profile along x' 
+rep 'BGK_2.prof_j.dat' index i u 1:2     title 'Density profile along y' 
+print "i=", i
+i=i+1
+#pause -1 "click to continue"
+pause 0.5
+if(i<1000) reread
+
