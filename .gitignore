@@ -1,0 +1,11 @@
+# Object files
+*.o
+*.mod
+
+# VTK output file 
+*.vtk
+
+# other output file
+*.txt 
+*.dat 
+*.bin
