@@ -4,7 +4,13 @@
 
 ! ------- modules 
         use storage
-        implicit double precision(a-h,o-z)
+        implicit none
+
+        integer :: i,j
+        real(mykind) :: fnnx,fnny,fnnnx,fnnny,f2x,f2y
+        real(mykind) :: usq,vsq,sumsq,sumsq2,u22,v22,ui,vi,uv,rhoij
+        real(mykind) :: feq0,feq1,feq2,feq3,feq4,feq5,feq6,feq7,feq8
+        real(mykind) :: rho1
 
 
 !$OMP PARALLEL DEFAULT(NONE)                                &

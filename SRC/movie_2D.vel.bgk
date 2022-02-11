@@ -2,7 +2,7 @@
 set pm3d
 unset surface
 set pm3d map
-set cbr[0:0.15]   # velocity palette
+set cbr[0:0.015]   # velocity palette
 #set size square
 set size ratio -1
 #splot 'BGK_2.ruv2d' index i u 1:2:3 title 'Density Contours' 

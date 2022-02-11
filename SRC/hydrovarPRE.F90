@@ -4,7 +4,10 @@
 
 ! ------- modules
         use storage
-        implicit double precision(a-h,o-z)
+        implicit none
+
+        integer :: i,j
+        real(mykind):: rho1
 
 ! Calculation of velocities and pseudopotential
 !$OMP PARALLEL DEFAULT(NONE)                                &

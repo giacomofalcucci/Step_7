@@ -283,9 +283,12 @@
 
 ! ------- modules 
         use storage
-        implicit double precision(a-h,o-z)
+        implicit none
 
-        real(dp):: tot_e, tot_u, tot_v
+        integer     :: i,j
+        real(mykind):: tot_e, tot_u, tot_v
+        real(mykind):: densit, paramord
+        real(mykind):: umoy, vmoy
 
         densit = 0.0d0
 
@@ -326,7 +329,7 @@
            enddo
         enddo
         paramord = paramord / dfloat(nx*ny)
-        paramord = dsqrt(paramord) / rhoaver
+        paramord = sqrt(paramord) / rhoaver
 
 	umoy = 0.0d0
 	vmoy = 0.0d0

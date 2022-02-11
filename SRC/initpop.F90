@@ -4,7 +4,12 @@
 
 ! ------- modules
         use storage
-        implicit double precision(a-h,o-z)
+        implicit none
+
+        integer:: i,j
+        real(mykind):: usq,vsq,sumsq,sumsq2,u22,v22
+        real(mykind):: ui,vi,rhoij
+        real(mykind):: uv
            
         if (dump.eq.1)then
            call resume

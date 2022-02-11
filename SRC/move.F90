@@ -4,13 +4,14 @@
 
 ! ------- modules
         use storage
-        implicit double precision(a-h,o-z)
+        implicit none
+
+        integer:: i,j
 
 !$acc kernels
 !$acc loop independent collapse(2)
         do j = 1,ny
            do i = 1, nx
-!              fp0(i,j) = f0(i,j)
               fp1(i,j) = f1(i-1,j)
               fp2(i,j) = f2(i,j-1)
               fp3(i,j) = f3(i+1,j)
@@ -29,7 +30,6 @@
 !$acc kernels
 !$acc loop independent 
         do i = 0, nx+1 
-!           fp0(i,j)=f0(i,j)
            fp1(i,j)=f1(i,j)
            fp2(i,j)=f2(i,j)
            fp3(i,j)=f3(i,j)
@@ -45,7 +45,6 @@
 !$acc kernels
 !$acc loop independent 
         do i = 0, nx+1 
-!           fp0(i,j)=f0(i,j)
            fp1(i,j)=f1(i,j)
            fp2(i,j)=f2(i,j)
            fp3(i,j)=f3(i,j)
@@ -61,7 +60,6 @@
 !$acc kernels
 !$acc loop independent 
         do j = 0, ny+1
-!           fp0(i,j)=f0(i,j)
            fp1(i,j)=f1(i,j)
            fp2(i,j)=f2(i,j)
            fp3(i,j)=f3(i,j)
@@ -77,7 +75,6 @@
 !$acc kernels
 !$acc loop independent 
         do j = 0, ny+1
-!           fp0(i,j)=f0(i,j)
            fp1(i,j)=f1(i,j)
            fp2(i,j)=f2(i,j)
            fp3(i,j)=f3(i,j)

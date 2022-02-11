@@ -3,15 +3,16 @@
 !---------------------------------------------------
 ! ------- modules
         use storage
-        implicit double precision(a-h,o-z)
+        implicit none
 
 #ifdef NVFORTRAN        
         real*8 rand 
 #else
         real*4 rand ! hack for intel compiler
 #endif        
-        real(dp)            ::  x,y
-        real(dp), parameter ::  pi=3.141592653589793238462643383279
+        integer             ::  i,j
+        real(mykind)            ::  x,y, radius2
+        real(mykind), parameter ::  pi=3.141592653589793238462643383279
 
 ! set everything to zero
         do j = 1, ny
@@ -28,7 +29,7 @@
         if (icond == 1) then 
 !                
 ! for a squared box
-           radius2 = (ny*0.08)**2
+           radius2 = (20.0)**2
 ! for a rectangular box
 !           radius2 = (ny*0.25)**2
            write(6,*) "INFO: case 1, bubble radius ", sqrt(radius2)
@@ -116,13 +117,13 @@
         if (icond .eq. 4) then 
            write(6,*) "INFO: case 4, Taylor-Green vortex"
            do j = 1, ny
-              y = (real(j,dp)-0.5d0)/real(ny,dp)        ! 0<y<1 
+              y = (real(j,mykind)-0.5d0)/real(ny,mykind)        ! 0<y<1 
               do i = 1, nx
-                 x = (real(i,dp)-0.5d0)/real(nx,dp)     ! 0<x<1 
-                 u1(i,j) =+0.1d0*sin(real(2,dp)*pi*x) & 
-     &                          *cos(real(2,dp)*pi*y)  
-                 v1(i,j) =-0.1d0*cos(real(2,dp)*pi*x) &
-     &                          *sin(real(2,dp)*pi*y)
+                 x = (real(i,mykind)-0.5d0)/real(nx,mykind)     ! 0<x<1 
+                 u1(i,j) =+0.1d0*sin(real(2,mykind)*pi*x) & 
+     &                          *cos(real(2,mykind)*pi*y)  
+                 v1(i,j) =-0.1d0*cos(real(2,mykind)*pi*x) &
+     &                          *sin(real(2,mykind)*pi*y)
                  u2(i,j) = u1(i,j)
                  v2(i,j) = v2(i,j)
                  rhod1(i,j) = 1.d0

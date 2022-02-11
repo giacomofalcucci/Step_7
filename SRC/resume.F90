@@ -4,7 +4,9 @@
 
 ! ------- modules 
         use storage
-        implicit double precision(a-h,o-z)
+        implicit none
+
+        integer:: i,j
 
         write(6,*)'################################'
         write(6,*)'reading  popolations ....'

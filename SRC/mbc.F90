@@ -4,7 +4,9 @@
 
 ! ------- modules 
         use storage
-        implicit double precision(a-h,o-z)
+        implicit none
+
+        integer:: i,j
 ! EAST case
         do j = 1,ny
            f1(0,j) = f1(nx,j)

@@ -4,11 +4,13 @@
 
 ! ------- modules
         use storage
+        implicit none
+!
+        integer:: i
 !
 #ifdef _OPENMP
         use omp_lib
 #endif
-        implicit double precision(a-h,o-z)
 
 #ifdef _OPENMP
         INTEGER:: nthreads, threadid
@@ -107,7 +109,6 @@
 #ifdef _OPENACC
         print*,' Using OpenACC version                                '
 #endif
-        call sleep(1)
         print*,'Number of cells :',nx,'*',ny
         print*,'Nsteps :',nsteps
         print*,'Relaxation frequency :',omega
@@ -120,7 +121,14 @@
         endif
         write(6,*)'Initial condition', icond
         write(6,*)'Output file :',fileout
-
+        write(6,*) "INFO: mykind=", mykind, "range  =", range(u0)
+        write(6,*) "INFO: mykind=", mykind, "huge   =", huge(u0)
+        write(6,*) "INFO: mykind=", mykind, "epsilon=", epsilon(u0)
+        write(6,*) "INFO: stkind=", stkind, "range  =", range(f0)
+        write(6,*) "INFO: stkind=", stkind, "huge   =", huge(f0)
+        write(6,*) "INFO: stkind=", stkind, "epsilon=", epsilon(f0)
+        print*,'*******************************************************'
+        call sleep(1)
 !
         if (iforce) then
            write(6,*) & 
