@@ -291,6 +291,9 @@
         real(mykind):: umoy, vmoy
 
         densit = 0.0d0
+        tot_u = 0
+        tot_v = 0
+        tot_e = 0
 
         do j= 1, ny
            do i = 1, nx
@@ -299,7 +302,7 @@
      &                   f5(i,j)+f6(i,j)+f7(i,j)+f8(i,j)
               tot_u = tot_v + u1(i,j)
               tot_v = tot_v + v1(i,j)
-              tot_e = tot_e + (u1(i,j)*u1(i,j)+v1(i,j)*v1(i,j))
+              tot_e = tot_e + ((u1(i,j)*u1(i,j))+(v1(i,j)*v1(i,j)))
            enddo
         enddo
         densit = densit / dfloat(nx*ny) 
