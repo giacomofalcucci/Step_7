@@ -1,11 +1,11 @@
 128	                 nx
 128                      ny 
-50000                    nsteps
-5000                        nsteps for output (nout)
+10000                    nsteps
+500                        nsteps for output (nout)
 500                       nsteps for diagnostics  (ndiag)
 1.00d0                   dt (=dx)    
 0.2 			 viscosity
-0.0d0			 G (-5.00d0)
+-5.0d0			 G (-5.00d0)
 1.00d0                   rhopsi          
 T                        Boolean for force
 0.6931472d0   		 rhoin 
@@ -13,7 +13,7 @@ T                        Boolean for force
 0.0d0			 v0
 0.0d0                    u final 
 F                        boolean
-4                        initial condition (1/2/3/4)
+2                        initial condition (1/2/3/4)
 BGK_2                    name of ouput file
 0                        0 does NOT read the dump
 

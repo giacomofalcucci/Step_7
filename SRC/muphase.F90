@@ -24,7 +24,11 @@
 
 ! -------t=0 snapshot
         call out1d(frce)
+#ifdef GNUPLOT
         call out2d(frce)
+#else
+        call out2d_vtk
+#endif
 
 ! ------- MAIN LOOP
 
@@ -48,7 +52,11 @@
 !
            if (mod(istep,nout).eq.0) then
               call out1d(frce)
+#ifdef GNUPLOT
               call out2d(frce)
+#else
+              call out2d_vtk
+#endif
            endif
 !
            if (mod(istep,100).eq.0) then
