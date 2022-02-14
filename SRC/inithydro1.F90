@@ -74,7 +74,6 @@
                  rhod1(i,j)=rhoin*(1.d0+0.01d0*(r-0.5d0)*2.d0)
 #else                 
                  rhod1(i,j)=rhoin*(1.d0+0.01d0*(rand(0)-0.5d0)*2.d0)
-                 stop
 #endif
               enddo
            enddo
