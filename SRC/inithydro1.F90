@@ -10,8 +10,8 @@
 #else
         real*4 rand ! hack for intel compiler
 #endif        
-        integer             ::  i,j
-        real(mykind)            ::  x,y, radius2
+        integer                 ::  i,j
+        real(mykind)            ::  x,y, radius2, r
         real(mykind), parameter ::  pi=3.141592653589793238462643383279
 
 ! set everything to zero
@@ -69,7 +69,13 @@
 
            do j = 1,ny
               do i =1,nx
+#ifdef PWR              
+                 call random_number ( harvest = r )
+                 rhod1(i,j)=rhoin*(1.d0+0.01d0*(r-0.5d0)*2.d0)
+#else                 
                  rhod1(i,j)=rhoin*(1.d0+0.01d0*(rand(0)-0.5d0)*2.d0)
+                 stop
+#endif
               enddo
            enddo
         endif
