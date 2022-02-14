@@ -24,14 +24,12 @@
            enddo
         enddo
 
+! for a squared box
+           radius2 = (radius)**2
 
 ! Case 1 (single bubble)
         if (icond == 1) then 
 !                
-! for a squared box
-           radius2 = (20.0)**2
-! for a rectangular box
-!           radius2 = (ny*0.25)**2
            write(6,*) "INFO: case 1, bubble radius ", sqrt(radius2)
            do j = 0,ny+1
               do i =0,nx+1
@@ -42,11 +40,13 @@
                  v2(i,j) = v0
 !            
                  if (((i-nx/2)**2+(j-ny/2)**2).lt.radius2) then
-                    rhod1(i,j)= 1.939027909286642
+                    rhod1(i,j)= rhoin1
+!                    rhod1(i,j)= 1.939027909286642
 !                    rhod1(i,j)=  &
 !                    2.410d0*(1.d0 + 0.01d0* (rand(0) - 0.5d0) * 2.d0) 
                  else
-                    rhod1(i,j)=0.1572145251524053
+                    rhod1(i,j)=rhoin2
+!                    rhod1(i,j)=0.1572145251524053
 !                    rhod1(i,j)=0.1250d0
                  endif
               enddo
@@ -81,14 +81,13 @@
 
 ! Case 3 (two bubbles colliding)
         if (icond == 3) then
-           radius2 = (ny*0.08)**2
            write(6,*) "INFO: case 3, colliding bubble, radius=", & 
      &                 sqrt(radius2)
 !
 ! left bubble
            do j = 0,ny+1
               do i = 0,nx/2
-                 if (((i-nx/4)**2+(j-ny/2-70)**2).lt.radius2) then
+                 if (((i-nx/4)**2+(j-ny/2-25)**2).lt.radius2) then
                     rhod1(i,j)= 1.939027909286642
                     u1(i,j) = u0
                     v1(i,j) = v0
@@ -104,7 +103,7 @@
 ! right bubble                
            do j = 0,ny+1
               do i = nx/2+1, nx+1
-                 if (((i-3*nx/4)**2+(j-ny/2)**2).lt.radius2) then
+                 if (((i-3*nx/4)**2+(j-ny/2+25)**2).lt.radius2) then
                     rhod1(i,j)= 1.939027909286642
 !
                     u1(i,j) = -u0
@@ -141,6 +140,9 @@
            stop
         endif
 
-        return
+#ifdef DEBUG
+        write(6,*) "DEBUG: Completed subroutine inithydro1"
+#endif
+        
         end subroutine inithydro1
 

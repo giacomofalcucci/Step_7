@@ -47,8 +47,11 @@
         print*,' Applied force  (.TRUE. or .FALSE.) ?'
         read(5,*)iforce 
 
-        print*,'READING: Initial density'
-        read(5,*)rhoin
+        read(5,*)rhoin1
+        print*,'READING: Initial high density', rhoin1
+     
+        read(5,*)rhoin2
+        print*,'READING: Initial low density', rhoin2
      
         print*,'READING: Initial X velocity component'
         read(5,*)u0
@@ -63,18 +66,26 @@
         read(5,*)iobst
 
         if (iobst) then
-            print*,'READING: Length of the obstacle (multiple of 2)'
             read(5,*)nobst
+            print*,'READING: Length of the obstacle (multiple of 2)', nobst
         endif
 
         print*,'READING: Initial condition (1-4) ?'
         read(5,*)icond
 
+        if(icond.EQ.4) then
+            write(6,*) "WARNING: setting gnn=0, single phase"
+            gnn = 0
+        endif
+
         print*,'READING: File for output: 5 chars'
         read(5,'(A)')fileout
 
-        print*,'READING: read populations dump (0 or 1)'
         read(5,*)dump
+        print*,'READING: read populations dump (0 or 1)', dump
+
+        read(5,*)radius
+        print*,'READING: read bubble size (0 or 1)', radius
 
         close(5)
 
@@ -182,15 +193,15 @@
         omega = 1.d0/(3.*visc*(dt*dt)/(dx*dx) + 0.5*dt)
 
 !	visc = (1.0d0 / omega - 0.5d0) * cs2
-        print*,' INFO: Viscosity :',visc,omega,w(0)
+        print*,'INFO: Viscosity, omega ',visc,omega
 
 ! calculation of the constant applied force
         fpois = 8.0d0 * visc * uf / dfloat(ny) / dfloat(ny)
         fpois = rhoin*fpois/6.  ! # of biased populations
-        print*,' INFO: Intensity of the applied force ',fpois
+        print*,'INFO: Intensity of the applied force ',fpois
 
-!#ifdef DEBUG
+#ifdef DEBUG
         write(6,*) "DEBUG: Completed subroutine input"
-!#endif
+#endif
        
         end subroutine input

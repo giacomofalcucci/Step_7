@@ -7,6 +7,7 @@
         implicit none
 
         integer:: i,j
+        real(sp):: den1
 !
         character*19 file_name
         file_name = 'tec_xy.xxxxxxxx.vtk'
@@ -24,7 +25,7 @@
         write(52,'(A8,I10,A1,I10,A1,I10)') 'SPACING ',1,' ',1,' ',1
         write(52,'(A10,I10)')'POINT_DATA ',nx*ny*1
 ! write scalar
-        write(52,'(A25)')'SCALARS density double'
+        write(52,'(A25)')'SCALARS density float'
         write(52,'(A20)')'LOOKUP_TABLE default'
         close(52)
 !
@@ -33,7 +34,8 @@
      &          form='unformatted',access='STREAM',CONVERT="BIG_ENDIAN")
         do j = 1,ny
            do i = 1,nx
-              write(52) rhod1(i,j)
+              den1 = rhod1(i,j)
+              write(52) den1
            end do
         end do
         close(52)
