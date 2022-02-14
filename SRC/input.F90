@@ -47,33 +47,33 @@
         print*,' Applied force  (.TRUE. or .FALSE.) ?'
         read(5,*)iforce 
 
-        print*,' Initial density'
+        print*,'READING: Initial density'
         read(5,*)rhoin
      
-        print*,' Initial X velocity component'
+        print*,'READING: Initial X velocity component'
         read(5,*)u0
 
-        print*,' Initial Y velocity component'
+        print*,'READING: Initial Y velocity component'
         read(5,*)v0
 
-        print*,' Final velocity for the Poise force'
+        print*,'READING: Final velocity for the Poise force'
         read(5,*)uf
 
-        print*,' Linear obstacle ?'
+        print*,'READING: Linear obstacle ?'
         read(5,*)iobst
 
         if (iobst) then
-            print*,' Length of the obstacle (multiple of 2)'
+            print*,'READING: Length of the obstacle (multiple of 2)'
             read(5,*)nobst
         endif
 
-        print*,' Initial condition (1 single bubble, 2 many obstacle ?'
+        print*,'READING: Initial condition (1-4) ?'
         read(5,*)icond
 
-        print*,' File for output: 5 chars'
+        print*,'READING: File for output: 5 chars'
         read(5,'(A)')fileout
 
-        print*,' read populations dump (0 or 1)'
+        print*,'READING: read populations dump (0 or 1)'
         read(5,*)dump
 
         close(5)
@@ -128,7 +128,11 @@
         write(6,*) "INFO: stkind=", stkind, "huge   =", huge(f0)
         write(6,*) "INFO: stkind=", stkind, "epsilon=", epsilon(f0)
         print*,'*******************************************************'
+#ifdef PWR
+! do othing
+#else        
         call sleep(1)
+#endif        
 !
         if (iforce) then
            write(6,*) & 
@@ -178,15 +182,15 @@
         omega = 1.d0/(3.*visc*(dt*dt)/(dx*dx) + 0.5*dt)
 
 !	visc = (1.0d0 / omega - 0.5d0) * cs2
-        print*,' Viscosity :',visc,omega,w(0)
+        print*,' INFO: Viscosity :',visc,omega,w(0)
 
 ! calculation of the constant applied force
         fpois = 8.0d0 * visc * uf / dfloat(ny) / dfloat(ny)
         fpois = rhoin*fpois/6.  ! # of biased populations
-        print*,' Intensity of the applied force ',fpois
+        print*,' INFO: Intensity of the applied force ',fpois
 
-#ifdef DEBUG
-        write(6,*) "Completed subroutine input"
-#endif
+!#ifdef DEBUG
+        write(6,*) "DEBUG: Completed subroutine input"
+!#endif
        
         end subroutine input
