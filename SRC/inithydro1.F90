@@ -88,14 +88,14 @@
            do j = 0,ny+1
               do i = 0,nx/2
                  if (((i-nx/4)**2+(j-ny/2-25)**2).lt.radius2) then
-                    rhod1(i,j)= 1.939027909286642
+                    rhod1(i,j)= rhoin1
                     u1(i,j) = u0
                     v1(i,j) = v0
                     u2(i,j) = u0
                     v2(i,j) = v0
 !
                  else
-                    rhod1(i,j)=0.1572145251524053
+                    rhod1(i,j)= rhoin2
                  endif
               enddo
            enddo
@@ -104,7 +104,7 @@
            do j = 0,ny+1
               do i = nx/2+1, nx+1
                  if (((i-3*nx/4)**2+(j-ny/2+25)**2).lt.radius2) then
-                    rhod1(i,j)= 1.939027909286642
+                    rhod1(i,j)= rhoin1
 !
                     u1(i,j) = -u0
                     v1(i,j) = -v0
@@ -112,7 +112,7 @@
                     v2(i,j) = -v0
 !
                  else
-                    rhod1(i,j)=0.1572145251524053
+                    rhod1(i,j)= rhoin2
                  endif
               enddo
            enddo

@@ -17,35 +17,35 @@
 #endif
         open(5,file='muphase.inp')
 
-        print*,'READING: Size X'
         read(5,*)nx
+        print*,'READING: Size X', nx
 
-        print*,'READING: Sixe Y'
         read(5,*)ny
+        print*,'READING: Sixe Y', ny
 
-        print*,'READING: Number of steps'
         read(5,*)nsteps
+        print*,'READING: Number of steps', nsteps
 
-        print*,'READING: Number of steps between printing profile'
         read(5,*)nout
+        print*,'READING: Number of steps between profile', nout
 
-        print*,'READING: Number of steps between performing diagnostics'
         read(5,*)ndiag
+        print*,'READING: Number of steps between diagnostics', ndiag
 
-        print*,'READING: dt'
         read(5,*)dt
+        print*,'READING: dt', dt
 
-        print*,'READING: viscosity'
         read(5,*)visc
+        print*,'READING: viscosity', visc
 
-        print*,'READING: Coupling gnn'
         read(5,*)gnn
+        print*,'READING: Coupling gnn', gnn
 
-        print*,'READING: rhopsi'
         read(5,*)rhopsi
+        print*,'READING: rhopsi', rhopsi
 
-        print*,' Applied force  (.TRUE. or .FALSE.) ?'
         read(5,*)iforce 
+        print*,' Applied force  (.TRUE. or .FALSE.) ?', iforce
 
         read(5,*)rhoin1
         print*,'READING: Initial high density', rhoin1
@@ -53,33 +53,33 @@
         read(5,*)rhoin2
         print*,'READING: Initial low density', rhoin2
      
-        print*,'READING: Initial X velocity component'
         read(5,*)u0
+        print*,'READING: Initial X velocity component', u0
 
-        print*,'READING: Initial Y velocity component'
         read(5,*)v0
+        print*,'READING: Initial Y velocity component', v0
 
-        print*,'READING: Final velocity for the Poise force'
         read(5,*)uf
+        print*,'READING: Final velocity for the Poise force', uf
 
-        print*,'READING: Linear obstacle ?'
         read(5,*)iobst
+        print*,'READING: Linear obstacle ?', iobst
 
         if (iobst) then
             read(5,*)nobst
             print*,'READING: Length of the obstacle (multiple of 2)', nobst
         endif
 
-        print*,'READING: Initial condition (1-4) ?'
         read(5,*)icond
+        print*,'READING: Initial condition (1-4) ?', icond
 
         if(icond.EQ.4) then
             write(6,*) "WARNING: setting gnn=0, single phase"
             gnn = 0
         endif
 
-        print*,'READING: File for output: 5 chars'
         read(5,'(A)')fileout
+        print*,'READING: File for output: 5 chars', fileout
 
         read(5,*)dump
         print*,'READING: read populations dump (0 or 1)', dump
@@ -92,10 +92,10 @@
         open(11,file=fileout//'.prof_j.dat')
         open(12,file=fileout//'.prof_i.dat')
         open(51,file=fileout//'.ruv2d')
+        open(69,file=fileout//'.diagno.dat')
+!        
         open(111,file='dump_pop',status='unknown',form='unformatted')
-
         open(112,file='dump_rhod1',status='unknown',form='unformatted')
-
         open(113,file='dump_u1_v1',status='unknown',form='unformatted')
 
         print*,'*******************************************************'
@@ -118,20 +118,20 @@
 #endif
 !
 #ifdef _OPENACC
-        print*,' Using OpenACC version                                '
+        print*,'INFO: Using OpenACC version                           '
 #endif
-        print*,'Number of cells :',nx,'*',ny
-        print*,'Nsteps :',nsteps
-        print*,'Relaxation frequency :',omega
-        print*,'Coupling gnn :',gnn
-        print*,'Coupling gnnn :',gnnn
-        print*,'Applied force :',iforce
-        print*,'Initial velocity:',u0, v0
+        print*,'INFO: Number of cells :',nx,'*',ny
+        print*,'INFO: Nsteps :',nsteps
+        print*,'INFO: Relaxation frequency :',omega
+        print*,'INFO: Coupling gnn :',gnn
+        print*,'INFO: Coupling gnnn :',gnnn
+        print*,'INFO: Applied force :',iforce
+        print*,'INFO: Initial velocity:',u0, v0
         if (iobst) then
-            print*,' Linear Obstacle with length :',nobst
+                print*,'INFO:  Linear Obstacle with length :',nobst
         endif
-        write(6,*)'Initial condition', icond
-        write(6,*)'Output file :',fileout
+        write(6,*)'INFO: Initial condition', icond
+        write(6,*)'INFO: Output file :',fileout
         write(6,*) "INFO: mykind=", mykind, "range  =", range(u0)
         write(6,*) "INFO: mykind=", mykind, "huge   =", huge(u0)
         write(6,*) "INFO: mykind=", mykind, "epsilon=", epsilon(u0)
