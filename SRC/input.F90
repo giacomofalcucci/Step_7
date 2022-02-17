@@ -92,6 +92,7 @@
         open(11,file=fileout//'.prof_j.dat')
         open(12,file=fileout//'.prof_i.dat')
         open(51,file=fileout//'.ruv2d')
+        open(68,file=fileout//'.phase.dat')
         open(69,file=fileout//'.diagno.dat')
 !        
         open(111,file='dump_pop',status='unknown',form='unformatted')

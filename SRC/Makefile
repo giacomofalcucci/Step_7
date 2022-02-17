@@ -33,6 +33,7 @@ OBJ = storage.o \
       savepop.o \
       resume.o \
       calcsurf.o \
+      out0d.o \
       out2D_vtk.o \
       laplace.o
 

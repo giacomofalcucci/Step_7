@@ -87,7 +87,7 @@
 ! left bubble
            do j = 0,ny+1
               do i = 0,nx/2
-                 if (((i-nx/4)**2+(j-ny/2-25)**2).lt.radius2) then
+                 if (((i-nx/4)**2+(j-ny/2-75)**2).lt.radius2) then
                     rhod1(i,j)= rhoin1
                     u1(i,j) = u0
                     v1(i,j) = v0
@@ -103,7 +103,7 @@
 ! right bubble                
            do j = 0,ny+1
               do i = nx/2+1, nx+1
-                 if (((i-3*nx/4)**2+(j-ny/2+25)**2).lt.radius2) then
+                 if (((i-3*nx/4)**2+(j-ny/2+75)**2).lt.radius2) then
                     rhod1(i,j)= rhoin1
 !
                     u1(i,j) = -u0
