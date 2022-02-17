@@ -29,6 +29,7 @@
         call out2d(frce)
 #else
         call out2d_vtk
+!        call out2d_fast
 #endif
 
 ! ------- MAIN LOOP
@@ -56,7 +57,8 @@
 #ifdef GNUPLOT
               call out2d(frce)          ! 2-d statistic
 #else
-              call out2d_vtk            ! 2-d statistic
+!              call out2d_vtk            ! 2-d statistic
+              call out2d_fast
 #endif
            endif
 !
