@@ -56,7 +56,7 @@
 
 ! Case 2 (many bubbles)
         if (icond == 2) then 
-           write(6,*) "INFO: case 2, random noise "
+           write(6,*) "INFO: case 2, random noise ", rhoin2
 !                
 ! modified to take into account the possibility of localized peturbation
            do j = 1, ny
@@ -67,14 +67,15 @@
                  v2(i,j) = v0
               enddo
            enddo
-
+!
+           write(6,*) "WARNING: magic number"
            do j = 1,ny
               do i =1,nx
 #ifdef PWR              
                  call random_number ( harvest = r )
-                 rhod1(i,j)=rhoin*(1.d0+0.01d0*(r-0.5d0)*2.d0)
+                 rhod1(i,j)=0.6931472d0*(1.d0+0.01d0*(r-0.5d0)*2.d0)
 #else                 
-                 rhod1(i,j)=rhoin*(1.d0+0.01d0*(rand(0)-0.5d0)*2.d0)
+                 rhod1(i,j)=0.6931472d0*(1.d0+0.01d0*(rand(0)-0.5d0)*2.d0)
 #endif
               enddo
            enddo
