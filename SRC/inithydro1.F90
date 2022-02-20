@@ -121,15 +121,14 @@
         endif
 !
 ! Case 4  1-D Band
-        if (icond .eq. 5) then
+        if (icond .eq. 4) then
            write(6,*) "INFO: case 4, 1D band"
            do j = 1, ny
               do i = 1, nx
-                 if (i.lt.(nx/2-radius)) then 
-                    rhod1(i,j)= rhoin1
+                 rhod1(i,j)= rhoin1
+                 if      (i.lt.(nx/2-radius)) then 
+                    rhod1(i,j)= rhoin2
                  else if (i.gt.(nx/2+radius)) then
-                    rhod1(i,j)= rhoin1
-                 else
                     rhod1(i,j)= rhoin2
                  endif
               enddo
