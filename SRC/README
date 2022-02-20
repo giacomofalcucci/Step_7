@@ -6,10 +6,11 @@
 * to compile
 Only nvfortran suppor openacc so
 
-make FC=nvfortran FOPT="-acc -Minfo=acc -O3 -ta=tesla:cc70,managed" FIX="-DNVFORTRAN"
+* Nvidia V100
+  make FC=nvfortran FOPT="-acc -Minfo=acc -O3 -ta=tesla:cc70,managed" FIX="-DNVFORTRAN"
+* Nvidia A100
+  make FC=nvfortran FOPT="-acc -Minfo=acc -O3 -ta=tesla:cc80,managed" FIX="-DNVFORTRAN"
 
-For V100 --> cc70
-For A100 --> cc80
 
 Suggested exercise: 
 

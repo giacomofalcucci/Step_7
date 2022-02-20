@@ -42,13 +42,8 @@
 !            
                  if (((i-nx/2)**2+(j-ny/2)**2).lt.radius2) then
                     rhod1(i,j)= rhoin1
-!                    rhod1(i,j)= 1.939027909286642
-!                    rhod1(i,j)=  &
-!                    2.410d0*(1.d0 + 0.01d0* (rand(0) - 0.5d0) * 2.d0) 
                  else
                     rhod1(i,j)=rhoin2
-!                    rhod1(i,j)=0.1572145251524053
-!                    rhod1(i,j)=0.1250d0
                  endif
               enddo
            enddo
@@ -73,9 +68,11 @@
               do i =1,nx
 #ifdef PWR              
                  call random_number ( harvest = r )
-                 rhod1(i,j)=0.6931472d0*(1.d0+0.01d0*(r-0.5d0)*2.d0)
+!                 rhod1(i,j)=0.6931472d0*(1.d0+0.01d0*(r-0.5d0)*2.d0)
+                  rhod1(i,j)=0.5d0*(1.d0+0.01d0*(r-0.5d0)*2.d0)
 #else                 
-                 rhod1(i,j)=0.6931472d0*(1.d0+0.01d0*(rand(0)-0.5d0)*2.d0)
+!                 rhod1(i,j)=0.6931472d0*(1.d0+0.01d0*(rand(0)-0.5d0)*2.d0)
+                  rhod1(i,j)=0.5d0*(1.d0+0.01d0*(rand(0)-0.5d0)*2.d0)
 #endif
               enddo
            enddo
@@ -83,7 +80,7 @@
 
 ! Case 3 (two bubbles colliding)
         if (icond == 3) then
-           shift = 3*radius/4
+           shift = 4*radius/5
            write(6,*) "INFO: case 3, colliding bubble, radius=", & 
      &                 sqrt(radius2)
            write(6,*) "INFO: case 3, colliding bubble, shift=", & 
@@ -92,7 +89,7 @@
 ! left bubble
            do j = 0,ny+1
               do i = 0,nx/2
-                 if (((i-nx/4)**2+(j-ny/2-shift-3)**2).lt.radius2) then
+                 if (((i-nx/4)**2+(j-ny/2-shift)**2).lt.radius2) then
                     rhod1(i,j)= rhoin1
                     u1(i,j) = u0
                     v1(i,j) = v0
@@ -108,7 +105,7 @@
 ! right bubble                
            do j = 0,ny+1
               do i = nx/2+1, nx+1
-                 if (((i-3*nx/4)**2+(j-ny/2+shift-15)**2).lt.radius2) then
+                 if (((i-3*nx/4)**2+(j-ny/2+shift)**2).lt.radius2) then
                     rhod1(i,j)= rhoin1
 !
                     u1(i,j) = -u0
@@ -122,8 +119,25 @@
               enddo
            enddo
         endif
-
-        if (icond .eq. 4) then 
+!
+! Case 4  1-D Band
+        if (icond .eq. 5) then
+           write(6,*) "INFO: case 4, 1D band"
+           do j = 1, ny
+              do i = 1, nx
+                 if (i.lt.(nx/2-radius)) then 
+                    rhod1(i,j)= rhoin1
+                 else if (i.gt.(nx/2+radius)) then
+                    rhod1(i,j)= rhoin1
+                 else
+                    rhod1(i,j)= rhoin2
+                 endif
+              enddo
+           enddo
+        endif
+!
+! Case 5 Taylor-Green Vortex
+        if (icond .eq. 5) then 
            write(6,*) "INFO: case 4, Taylor-Green vortex"
            do j = 1, ny
               y = (real(j,mykind)-0.5d0)/real(ny,mykind)        ! 0<y<1 
@@ -138,9 +152,9 @@
                  rhod1(i,j) = 1.d0
               enddo
            enddo
-
         endif
-        if ((icond .gt. 4).or.(icond.lt.1)) then 
+!        
+        if ((icond .gt. 5).or.(icond.lt.1)) then 
            write(6,*) "ERROR: option (still) not supported"
            stop
         endif

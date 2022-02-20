@@ -19,8 +19,8 @@
         tot_e = 0
         rhomin = +1000.d0
         rhomax = -1000.d0
-        cutoff_l = rhoin1*0.9           ! liquid cutoff
-        cutoff_v = rhoin2*1.1           ! vapor cutoff
+        cutoff_l = rhoin1*0.65           ! liquid cutoff
+        cutoff_v = rhoin2*1.35           ! vapor cutoff
         liquid = 0
         vapor = 0
 

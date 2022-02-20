@@ -73,8 +73,8 @@
         read(5,*)icond
         print*,'READING: Initial condition (1-4) ?', icond
 
-        if(icond.EQ.4) then
-            write(6,*) "WARNING: setting gnn=0, single phase"
+        if(icond.EQ.5) then
+            write(6,*) "WARNING: forcing gnn=0, single phase"
             gnn = 0
         endif
 
@@ -92,6 +92,7 @@
         open(11,file=fileout//'.prof_j.dat')
         open(12,file=fileout//'.prof_i.dat')
         open(51,file=fileout//'.ruv2d')
+        open(67,file=fileout//'.rho.dat')
         open(68,file=fileout//'.phase.dat')
         open(69,file=fileout//'.diagno.dat')
 !        

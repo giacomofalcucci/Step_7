@@ -29,7 +29,7 @@
         call out2d(frce)
 #else
         call out2d_vtk
-!        call out2d_fast
+        call out2d_fast
 #endif
 
 ! ------- MAIN LOOP
