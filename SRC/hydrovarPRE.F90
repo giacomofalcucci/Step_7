@@ -9,6 +9,12 @@
         integer :: i,j
         real(mykind):: rho1
 
+#ifdef NOSHIFT
+        fix = zero
+#else
+        fix = uno
+#endif
+
 ! Calculation of velocities and pseudopotential
 !$OMP PARALLEL DEFAULT(NONE)                                &
 !$OMP PRIVATE(i,j,rho1)                                     &
@@ -31,7 +37,7 @@
                            fp5(i,j) + &
                            fp6(i,j) + &
                            fp7(i,j) + &
-                           fp8(i,j)
+                           fp8(i,j) + fix
               rho1 = 1.d0 / rhod1(i,j)        
               u1(i,j) = ( fp1(i,j) - fp3(i,j) + fp5(i,j)            &
                         - fp6(i,j) - fp7(i,j) + fp8(i,j) ) * rho1 

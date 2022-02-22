@@ -12,6 +12,11 @@
         real(mykind) :: feq0,feq1,feq2,feq3,feq4,feq5,feq6,feq7,feq8
         real(mykind) :: rho1
 
+#ifdef NOSHIFT
+        fix = zero
+#else
+        fix = uno
+#endif
 
 !$OMP PARALLEL DEFAULT(NONE)                                &
 !$OMP PRIVATE(i,j)                                          &
@@ -61,17 +66,17 @@
               uv = ui * vi
               rhoij = rhod1(i,j)
 
-              feq0 = cte04*rhoij*(1.0d0 - sumsq)
+              feq0 = cte04*rhoij*(1.0d0 - sumsq)            - fix*cte04
 
-              feq1 = cte09*rhoij*(1.0d0 - sumsq + u22 + ui)
-              feq2 = cte09*rhoij*(1.0d0 - sumsq + v22 + vi)
-              feq3 = cte09*rhoij*(1.0d0 - sumsq + u22 - ui)
-              feq4 = cte09*rhoij*(1.0d0 - sumsq + v22 - vi)
+              feq1 = cte09*rhoij*(1.0d0 - sumsq + u22 + ui) - fix*cte09
+              feq2 = cte09*rhoij*(1.0d0 - sumsq + v22 + vi) - fix*cte09
+              feq3 = cte09*rhoij*(1.0d0 - sumsq + u22 - ui) - fix*cte09
+              feq4 = cte09*rhoij*(1.0d0 - sumsq + v22 - vi) - fix*cte09
 
-              feq5 = cte36*rhoij*(1.0d0 + sumsq2 +ui+vi+uv)
-              feq6 = cte36*rhoij*(1.0d0 + sumsq2 -ui+vi-uv)
-              feq7 = cte36*rhoij*(1.0d0 + sumsq2 -ui-vi+uv)
-              feq8 = cte36*rhoij*(1.0d0 + sumsq2 +ui-vi-uv)
+              feq5 = cte36*rhoij*(1.0d0 + sumsq2 +ui+vi+uv) - fix*cte36
+              feq6 = cte36*rhoij*(1.0d0 + sumsq2 -ui+vi-uv) - fix*cte36
+              feq7 = cte36*rhoij*(1.0d0 + sumsq2 -ui-vi+uv) - fix*cte36
+              feq8 = cte36*rhoij*(1.0d0 + sumsq2 +ui-vi-uv) - fix*cte36
 
 ! compute correction              
               f0(i,j) =  f0(i,j) * (1.0d0 - omega) + omega * feq0
@@ -95,7 +100,7 @@
                            f5(i,j) + &
                            f6(i,j) + &
                            f7(i,j) + &
-                           f8(i,j)
+                           f8(i,j) + fix
               rho1 = 1.d0 / rhod1(i,j)        
               u1(i,j) = ( f1(i,j) - f3(i,j) + f5(i,j)            &
                         - f6(i,j) - f7(i,j) + f8(i,j) ) * rho1 

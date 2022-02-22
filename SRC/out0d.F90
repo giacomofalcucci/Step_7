@@ -24,11 +24,17 @@
         liquid = 0
         vapor = 0
 
+#ifdef NOSHIFT
+        fix = zero
+#else
+        fix = uno
+#endif
+
         do j= 1, ny
            do i = 1, nx
               rho0 = (f1(i,j)+f2(i,j)+f3(i,j)+f4(i,j))     &
      &              +(f5(i,j)+f6(i,j)+f7(i,j)+f8(i,j))     &
-     &               +f0(i,j)
+     &               +f0(i,j) + fix
 !
 ! computing max/min
               rhomax = max(rho0,rhomax)

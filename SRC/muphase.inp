@@ -1,21 +1,21 @@
-4096                    nx
-4096                    ny 
-100000                     nsteps
-1000                      nsteps for output (nout)
-2000                       nsteps for diagnostics  (ndiag)
+128                     nx
+128                     ny 
+30000                      nsteps
+10000                     nsteps for output (nout)
+500                     nsteps for diagnostics  (ndiag)
 1.00d0                   dt (=dx)    
 0.09 			 viscosity
 -5.25d0			 G (-5.00d0)
 1.00d0                   rhopsi          
 T                        Boolean for force
-2.097   	         rhoin1  1.939027909286642
-0.09655	                 rhoin2  0.1572145251524053
-0.11    		 u0
+1.939    	         rhoin1  1.939027909286642
+0.157	         	 rhoin2  0.1572145251524053
+0.0   		         u0
 0.0			 v0
 0.0d0                    u final 
 F                        boolean
-3                        initial condition (1/2/3/4)
-BGK_2                    name of ouput file
+1                        initial condition (1/2/3/4/5)
+dnoshif                    name of ouput file
 0                        0 does NOT read the dump
-93                       Radius
+25                      Radius
 

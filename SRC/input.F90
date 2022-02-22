@@ -125,6 +125,11 @@
         print*,'INFO: Number of cells :',nx,'*',ny
         print*,'INFO: Nsteps :',nsteps
         print*,'INFO: Relaxation frequency :',omega
+#ifdef NOSHIFT
+        print*,'INFO: Version with NO-SHIFTED equilibrium'
+#else
+        print*,'INFO: Version with SHIFTED equilibrium'
+#endif
         print*,'INFO: Coupling gnn :',gnn
         print*,'INFO: Coupling gnnn :',gnnn
         print*,'INFO: Applied force :',iforce

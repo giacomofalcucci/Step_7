@@ -11,6 +11,12 @@
         real(mykind):: ui,vi,rhoij
         real(mykind):: uv
            
+#ifdef NOSHIFT
+        fix = zero
+#else
+        fix = uno
+#endif
+
         if (dump.eq.1)then
            call resume
         else
@@ -28,17 +34,17 @@
                  uv = ui * vi
                  rhoij = rhod1(i,j)
 !
-                 f0(i,j) = cte04*rhoij*(1.0d0 - sumsq)
+                 f0(i,j) = cte04*rhoij*(1.0d0 - sumsq)           -fix*cte04
 
-                 f1(i,j) = cte09*rhoij*(1.0d0 - sumsq + u22 + ui)
-                 f2(i,j) = cte09*rhoij*(1.0d0 - sumsq + v22 + vi)
-                 f3(i,j) = cte09*rhoij*(1.0d0 - sumsq + u22 - ui)
-                 f4(i,j) = cte09*rhoij*(1.0d0 - sumsq + v22 - vi)
+                 f1(i,j) = cte09*rhoij*(1.0d0 - sumsq + u22 + ui)-fix*cte09
+                 f2(i,j) = cte09*rhoij*(1.0d0 - sumsq + v22 + vi)-fix*cte09
+                 f3(i,j) = cte09*rhoij*(1.0d0 - sumsq + u22 - ui)-fix*cte09
+                 f4(i,j) = cte09*rhoij*(1.0d0 - sumsq + v22 - vi)-fix*cte09
 
-                 f5(i,j) = cte36*rhoij*(1.0d0 + sumsq2 +ui+vi+uv)
-                 f6(i,j) = cte36*rhoij*(1.0d0 + sumsq2 -ui+vi-uv)
-                 f7(i,j) = cte36*rhoij*(1.0d0 + sumsq2 -ui-vi+uv)
-                 f8(i,j) = cte36*rhoij*(1.0d0 + sumsq2 +ui-vi-uv)
+                 f5(i,j) = cte36*rhoij*(1.0d0 + sumsq2 +ui+vi+uv)-fix*cte36
+                 f6(i,j) = cte36*rhoij*(1.0d0 + sumsq2 -ui+vi-uv)-fix*cte36
+                 f7(i,j) = cte36*rhoij*(1.0d0 + sumsq2 -ui-vi+uv)-fix*cte36
+                 f8(i,j) = cte36*rhoij*(1.0d0 + sumsq2 +ui-vi-uv)-fix*cte36
 
               enddo
            enddo
@@ -49,7 +55,7 @@
            do i = 1, nx
                rhoaver = rhoaver + f0(i,j) +  & 
      &                   f1(i,j)+f2(i,j)+f3(i,j)+f4(i,j)+ &
-     &                   f5(i,j)+f6(i,j)+f7(i,j)+f8(i,j)    
+     &                   f5(i,j)+f6(i,j)+f7(i,j)+f8(i,j) + fix    
            enddo
         enddo
 

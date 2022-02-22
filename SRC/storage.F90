@@ -36,6 +36,7 @@
         real(mykind) u0,v0,uf,fom  
         real(mykind) f_guo
 !/constants/
+        real(mykind) fix
         real(mykind) cs2,cs22,cssq,rhoin,omega,fpois,den,visc
         real(mykind) rhoin1, rhoin2
         real(mykind) w0,w1,w2,w4,w5,w8,gnn,gnnn,rhoaver,dinvrho
@@ -43,6 +44,8 @@
         real(mykind), parameter :: cte04 = (4.d0/ 9.d0)
         real(mykind), parameter :: cte09 = (1.d0/ 9.d0)
         real(mykind), parameter :: cte36 = (1.d0/36.d0)
+        real(mykind), parameter :: uno  = (1.d0)
+        real(mykind), parameter :: zero = (0.d0)
 !/count/ 
         integer istep,nout,ndiag,nsteps,nobst,icond
 !/arrays to allocate/
