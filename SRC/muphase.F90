@@ -23,8 +23,8 @@
         write(6,1001) time_init
 
 ! -------t=0 snapshot
-        call out0d(frce)
-        call out1d(frce)
+        call out0d
+        call out1d
 #ifdef GNUPLOT
         call out2d(frce)
 #else
@@ -48,7 +48,7 @@
 !
            if (mod(istep,ndiag).eq.0) then
               call out0d                ! 0-d statistic
-              call out1d(frce)          ! 1-d statistic
+              call out1d                ! 1-d statistic
               call energy
               call calcsurf
            endif

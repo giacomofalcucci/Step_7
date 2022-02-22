@@ -1,7 +1,8 @@
 !
         module storage
 !
-        implicit double precision(a-h,o-z)
+!        implicit double precision(a-h,o-z)
+        implicit none
 !
         integer, parameter:: sp=kind(1.0)
 !        integer, parameter:: dp=selected_real_kind(2*precision(1.0_sp))
