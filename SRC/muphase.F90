@@ -30,9 +30,10 @@
         call out0d
         call out1d
 #ifdef GNUPLOT
-        call out2d(frce)
+        call out2d
 #else
-        call out2d_vtk
+        call out2d_rho
+        call out2d_vel
 !        call out2d_fast
 #endif
 
@@ -59,9 +60,10 @@
 !
            if (mod(istep,nout).eq.0) then
 #ifdef GNUPLOT
-              call out2d(frce)          ! 2-d statistic
+              call out2d                ! 2-d statistic
 #else
-              call out2d_vtk            ! 2-d statistic
+              call out2d_vel            ! 2-d statistic
+              call out2d_rho            
 !              call out2d_fast
 #endif
            endif

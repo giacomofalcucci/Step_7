@@ -67,9 +67,9 @@
            do j = 1,ny
               do i =1,nx
 #ifdef PWR              
-                 call random_number ( harvest = r )
+!                 call random_number ( harvest = r )
 !                 rhod1(i,j)=0.6931472d0*(1.d0+0.01d0*(r-0.5d0)*2.d0)
-                  rhod1(i,j)=0.5d0*(1.d0+0.01d0*(r-0.5d0)*2.d0)
+!                  rhod1(i,j)=0.5d0*(1.d0+0.01d0*(r-0.5d0)*2.d0)
 #else                 
 !                 rhod1(i,j)=0.6931472d0*(1.d0+0.01d0*(rand(0)-0.5d0)*2.d0)
                   rhod1(i,j)=0.5d0*(1.d0+0.01d0*(rand(0)-0.5d0)*2.d0)

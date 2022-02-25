@@ -1,11 +1,12 @@
 !----------------------------------------------------------
-        subroutine out2d(frce)
+        subroutine out2d
 !----------------------------------------------------------
 
 ! ------- modules 
         use storage
-        implicit double precision(a-h,o-z)
+        implicit none
         
+        integer:: i,j
         do j = 1, ny
            do i = 1, nx
               write(51,99) i,j,rhod1(i,j),u1(i,j),v1(i,j)
@@ -21,8 +22,7 @@
 #ifdef DEBUG
         write(6,*) "Completed subroutine out2d"
 #endif
- 
-        end
+        end subroutine out2d
 
 !----------------------------------------------------------
         subroutine energy
