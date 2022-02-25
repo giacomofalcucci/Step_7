@@ -8,7 +8,10 @@
 
         integer :: i,j
         real(mykind) :: fnnx,fnny,fnnnx,fnnny,f2x,f2y
-        real(mykind) :: usq,vsq,sumsq,sumsq2,u22,v22,ui,vi,uv,rhoij
+        real(mykind) :: usq,vsq,sumsq,sumsq2,u22,v22,rhoij
+        real(mykind) :: ui
+        real(mykind) :: vi, inv
+        real(mykind) :: uv
         real(mykind) :: feq0,feq1,feq2,feq3,feq4,feq5,feq6,feq7,feq8
         real(mykind) :: rho1
 
@@ -17,6 +20,7 @@
 #else
         fix = uno
 #endif
+        inv = 1.d0/cs2
 
 !$OMP PARALLEL DEFAULT(NONE)                                &
 !$OMP PRIVATE(i,j)                                          &
@@ -45,10 +49,8 @@
                                - psi(i-1,j-1) - psi(i+1,j-1)))
 
 ! interactions
-              f2x =-(gnnn * fnnx * w1 + gnnn * fnnnx * w2)- &  
-                    (gnn * fnnx*cte09+ gnn * fnnnx *cte36)  
-              f2y =-(gnnn * fnny * w1 + gnnn * fnnny * w2)- & 
-                    (gnn * fnny*cte09+ gnn * fnnny *cte36)
+              f2x =-(gnn * fnnx*cte09+ gnn * fnnnx *cte36)  
+              f2y =-(gnn * fnny*cte09+ gnn * fnnny *cte36)
 
 ! SHIFT Equilibrium
               u1(i,j)=u1(i,j)+f2x/(omega*rhod1(i,j))
@@ -61,22 +63,24 @@
               sumsq2 = sumsq * (1.0d0 - cs2) / cs2
               u22 = usq / cssq 
               v22 = vsq / cssq
-              ui = u1(i,j) / cs2
-              vi = v1(i,j) / cs2
-              uv = ui * vi
+!              
+              ui = u1(i,j) * inv 
+              vi = v1(i,j) * inv 
+!              
+              uv = (ui * vi)
               rhoij = rhod1(i,j)
 
-              feq0 = cte04*rhoij*(1.0d0 - sumsq)            - fix*cte04
+              feq0 = cte04*rhoij*(uno - sumsq)            - fix*cte04
 
-              feq1 = cte09*rhoij*(1.0d0 - sumsq + u22 + ui) - fix*cte09
-              feq2 = cte09*rhoij*(1.0d0 - sumsq + v22 + vi) - fix*cte09
-              feq3 = cte09*rhoij*(1.0d0 - sumsq + u22 - ui) - fix*cte09
-              feq4 = cte09*rhoij*(1.0d0 - sumsq + v22 - vi) - fix*cte09
+              feq1 = cte09*rhoij*(uno - sumsq + u22 + ui) - fix*cte09
+              feq2 = cte09*rhoij*(uno - sumsq + v22 + vi) - fix*cte09
+              feq3 = cte09*rhoij*(uno - sumsq + u22 - ui) - fix*cte09
+              feq4 = cte09*rhoij*(uno - sumsq + v22 - vi) - fix*cte09
 
-              feq5 = cte36*rhoij*(1.0d0 + sumsq2 +ui+vi+uv) - fix*cte36
-              feq6 = cte36*rhoij*(1.0d0 + sumsq2 -ui+vi-uv) - fix*cte36
-              feq7 = cte36*rhoij*(1.0d0 + sumsq2 -ui-vi+uv) - fix*cte36
-              feq8 = cte36*rhoij*(1.0d0 + sumsq2 +ui-vi-uv) - fix*cte36
+              feq5 = cte36*rhoij*(uno + sumsq2 +ui+vi+uv) - fix*cte36
+              feq6 = cte36*rhoij*(uno + sumsq2 -ui+vi-uv) - fix*cte36
+              feq7 = cte36*rhoij*(uno + sumsq2 -ui-vi+uv) - fix*cte36
+              feq8 = cte36*rhoij*(uno + sumsq2 +ui-vi-uv) - fix*cte36
 
 ! compute correction              
               f0(i,j) =  f0(i,j) * (1.0d0 - omega) + omega * feq0

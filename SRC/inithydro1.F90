@@ -122,7 +122,7 @@
 !
 ! Case 4  1-D Band
         if (icond .eq. 4) then
-           write(6,*) "INFO: case 4, 1D band"
+                write(6,*) "INFO: case 4, Flat interface"
            do j = 1, ny
               do i = 1, nx
                  rhod1(i,j)= rhoin1
@@ -137,7 +137,7 @@
 !
 ! Case 5 Taylor-Green Vortex
         if (icond .eq. 5) then 
-           write(6,*) "INFO: case 4, Taylor-Green vortex"
+           write(6,*) "INFO: case 5, Taylor-Green vortex"
            do j = 1, ny
               y = (real(j,mykind)-0.5d0)/real(ny,mykind)        ! 0<y<1 
               do i = 1, nx

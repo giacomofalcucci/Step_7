@@ -139,12 +139,14 @@
         endif
         write(6,*)'INFO: Initial condition', icond
         write(6,*)'INFO: Output file :',fileout
-        write(6,*) "INFO: mykind=", mykind, "range  =", range(u0)
-        write(6,*) "INFO: mykind=", mykind, "huge   =", huge(u0)
-        write(6,*) "INFO: mykind=", mykind, "epsilon=", epsilon(u0)
-        write(6,*) "INFO: stkind=", stkind, "range  =", range(f0)
-        write(6,*) "INFO: stkind=", stkind, "huge   =", huge(f0)
-        write(6,*) "INFO: stkind=", stkind, "epsilon=", epsilon(f0)
+        write(6,*) "CHECK: mykind=", mykind, "range  =", range(u0)
+        write(6,*) "CHECK: mykind=", mykind, "huge   =", huge(u0)
+        write(6,*) "CHECK: mykind=", mykind, "epsilon=", epsilon(u0)
+        write(6,*) "CHECK: stkind=", stkind, "range  =", range(f0)
+        write(6,*) "CHECK: stkind=", stkind, "huge   =", huge(f0)
+        write(6,*) "CHECK: stkind=", stkind, "epsilon=", epsilon(f0)
+        write(6,*) "CHECK: uno   =", uno
+        write(6,*) "CHECK: zero  =", zero
         print*,'*******************************************************'
 #ifdef PWR
 ! do othing
@@ -162,9 +164,9 @@
         endif
 ! constants
 
-        cs2  = 1.0d0 / 3.0d0
-        cs22 = 2.0d0 * cs2
-        cssq = 2.0d0 / 9.0d0
+!        cs2  = 1.0d0 / 3.0d0
+!        cs22 = 2.0d0 / 3.0d0
+!        cssq = 2.0d0 / 9.0d0
 
 ! input weights and storage in w(o:npop-1) array
 

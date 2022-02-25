@@ -3,7 +3,11 @@
 ! ================================
 ! ------- modules
         use storage
-        implicit double precision(a-h,o-z)
+        implicit none
+
+        integer:: icounti0, icount_rate, icount_max, icounti1
+        integer:: icountl0, icountt0, icountl1, icountt1
+        real::  time_init, time_inn_loop
 
 ! ------- input parameters
 
@@ -29,7 +33,7 @@
         call out2d(frce)
 #else
         call out2d_vtk
-        call out2d_fast
+!        call out2d_fast
 #endif
 
 ! ------- MAIN LOOP
@@ -57,8 +61,8 @@
 #ifdef GNUPLOT
               call out2d(frce)          ! 2-d statistic
 #else
-!              call out2d_vtk            ! 2-d statistic
-              call out2d_fast
+              call out2d_vtk            ! 2-d statistic
+!              call out2d_fast
 #endif
            endif
 !

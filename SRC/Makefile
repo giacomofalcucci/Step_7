@@ -34,6 +34,7 @@ OBJ = storage.o \
       resume.o \
       calcsurf.o \
       out0d.o \
+      out1d.o \
       out2D_vtk.o \
       out2D_fast.o \
       laplace.o

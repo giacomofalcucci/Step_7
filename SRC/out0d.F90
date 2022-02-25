@@ -13,10 +13,10 @@
         real(mykind):: rho0, rhomax, rhomin
         real(mykind):: cutoff_l, cutoff_v
 
-        densit = 0.0d0
-        tot_u = 0
-        tot_v = 0
-        tot_e = 0
+        densit = zero
+        tot_u = zero
+        tot_v = zero
+        tot_e = zero
         rhomin = +1000.d0
         rhomax = -1000.d0
         cutoff_l = rhoin1*0.65           ! liquid cutoff
@@ -32,9 +32,10 @@
 
         do j= 1, ny
            do i = 1, nx
-              rho0 = (f1(i,j)+f2(i,j)+f3(i,j)+f4(i,j))     &
-     &              +(f5(i,j)+f6(i,j)+f7(i,j)+f8(i,j))     &
-     &               +f0(i,j) + fix
+              rho0 = rhod1(i,j)
+!              rho0 = (f1(i,j)+f2(i,j)+f3(i,j)+f4(i,j))     &
+!     &              +(f5(i,j)+f6(i,j)+f7(i,j)+f8(i,j))     &
+!     &               +f0(i,j) + fix
 !
 ! computing max/min
               rhomax = max(rho0,rhomax)
