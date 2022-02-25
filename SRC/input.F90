@@ -147,6 +147,12 @@
         write(6,*) "CHECK: stkind=", stkind, "epsilon=", epsilon(f0)
         write(6,*) "CHECK: uno   =", uno
         write(6,*) "CHECK: zero  =", zero
+        write(6,*) "CHECK: cte04 =", cte04
+        write(6,*) "CHECK: cte04 =", cte09
+        write(6,*) "CHECK: cte36 =", cte36
+        write(6,*) "CHECK: cs2   =", cs2
+        write(6,*) "CHECK: cs22  =", cs22
+        write(6,*) "CHECK: cssq  =", cssq
         print*,'*******************************************************'
 #ifdef PWR
 ! do othing

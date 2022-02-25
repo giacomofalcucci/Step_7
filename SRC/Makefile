@@ -37,6 +37,7 @@ OBJ = storage.o \
       out1d.o \
       out2D_vel.o \
       out2D_rho.o \
+      out2D_dbg.o \
       out2D_fast.o \
       laplace.o
 

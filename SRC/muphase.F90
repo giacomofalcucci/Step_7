@@ -34,6 +34,7 @@
 #else
         call out2d_rho
         call out2d_vel
+        call out2d_dbg
 !        call out2d_fast
 #endif
 
@@ -64,6 +65,7 @@
 #else
               call out2d_vel            ! 2-d statistic
               call out2d_rho            
+              call out2d_dbg
 !              call out2d_fast
 #endif
            endif
