@@ -120,17 +120,29 @@
            enddo
         endif
 !
-! Case 4  1-D Band
+! Case 4  Flat interface
         if (icond .eq. 4) then
                 write(6,*) "INFO: case 4, Flat interface"
+!                
+! sharp interface
+!           do j = 1, ny
+!              do i = 1, nx
+!                 rhod1(i,j)= rhoin1
+!                 if      (i.lt.(nx/2-radius)) then 
+!                    rhod1(i,j)= rhoin2
+!                 else if (i.gt.(nx/2+radius)) then
+!                    rhod1(i,j)= rhoin2
+!                 endif
+!              enddo
+!           enddo
+!        endif
+!
+! tanh interface (to fix)
            do j = 1, ny
               do i = 1, nx
-                 rhod1(i,j)= rhoin1
-                 if      (i.lt.(nx/2-radius)) then 
-                    rhod1(i,j)= rhoin2
-                 else if (i.gt.(nx/2+radius)) then
-                    rhod1(i,j)= rhoin2
-                 endif
+              rhod1(i,j) = rhoin2 + 0.5d0*(rhoin1-rhoin2)* &
+     &                    (tanh(2.0d0*(i-nx/2+radius))-  &
+     &                     tanh(2.0d0*(i-nx/2-radius)))  
               enddo
            enddo
         endif
