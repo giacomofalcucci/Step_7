@@ -137,12 +137,12 @@
 !           enddo
 !        endif
 !
-! tanh interface (to fix)
+! tanh interface (to fix, width = 4.0)
            do j = 1, ny
               do i = 1, nx
               rhod1(i,j) = rhoin2 + 0.5d0*(rhoin1-rhoin2)* &
-     &                    (tanh(2.0d0*(i-nx/2+radius))-  &
-     &                     tanh(2.0d0*(i-nx/2-radius)))  
+     &                    (tanh(2.0d0*(i-nx/2+radius)/4.0d0)-  &
+     &                     tanh(2.0d0*(i-nx/2-radius)/4.0d0))  
               enddo
            enddo
         endif
